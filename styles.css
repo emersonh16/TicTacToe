@@ -1,0 +1,28 @@
+body {
+    display: flex;
+    flex-direction: column;
+    background-color: lightgray;
+    align-items: center;
+}
+
+.gameboxHolder {
+    display: flex;
+    flex-direction: column;
+}
+
+.row1,.row2,.row3 {
+    display: flex;
+}
+
+.gamebox {
+    display: flex;
+    height: 50px;
+    width: 50px;
+    background-color: gray;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    border-color: black;
+    border-style: solid;
+    border-width: 0.05em;
+}
