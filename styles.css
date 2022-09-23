@@ -14,7 +14,7 @@ body {
     display: flex;
 }
 
-.gamebox {
+.field {
     display: flex;
     height: 50px;
     width: 50px;
