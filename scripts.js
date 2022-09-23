@@ -11,9 +11,11 @@
 */
 
 const gameController = (() => {
-    let board = ["","","","","","","","",""]
-    let round = 1 
+
+    let round = 1
     playerToken = "X"
+    let board = ["", "", "", "", "", "", "", "", ""]
+
     const winConditions = [
         [0, 1, 2],
         [3, 4, 5],
@@ -23,35 +25,79 @@ const gameController = (() => {
         [2, 5, 8],
         [0, 4, 8],
         [2, 4, 6],
-      ];  
+    ];
+
+
+
     const fieldElements = document.querySelectorAll(".field")
+    const resetButton = document.getElementById("resetBtn")
+
+    resetButton.addEventListener("click", reset)
 
     fieldElements.forEach(clickfunction)
-    
+
     function clickfunction(field) {
         field.addEventListener("click", playround)
     }
 
     function setToken() {
         if (round % 2 === 1) {
-            playerToken = "X"}
+            playerToken = "X"
+        }
         else {
             playerToken = "O"
         }
     }
-    
+
     function playround(e) {
         if (e.target.innerHTML === "") {
-        e.target.innerHTML = playerToken
-        round ++
-        setToken()
-        board[e.target.dataset.index] = playerToken
-        console.log(round)
-        console.log(board)
+            e.target.innerHTML = playerToken
+            board[e.target.dataset.index] = playerToken
+            round++
+            setToken()
+            //console.log(round)
+            console.log(board)
+            winConditions.forEach(checkWin)
         }
     }
+
+
+    function checkWin(wincondition) {
+        let Xticker = 0
+        let Oticker = 0
+
+        for (let i = 0; i < wincondition.length; i++) {
+            if (board[wincondition[i]] == "X")
+                Xticker++
+            else if ((board[wincondition[i]] == "O"))
+                Oticker++
+        }
+
+        if (Oticker == 3) {
+            console.log(Oticker, "O wins")
+        }
+        
+        if (Xticker == 3) {
+            console.log(Xticker, "X wins")
+        }
+
+
+        /*for item in Array
+        if all board[item] = "X"
+        win
+        else return */
+
+    }
+
+    function reset() {
+        board = ["", "", "", "", "", "", "", "", ""]
+        round = 1
+        playerToken = "X"
+        document.querySelectorAll(".field").forEach((field) => field.innerHTML = "")
+    }
+
 
 });
 
 gameController()
-gameboard()
+//gameboard()
