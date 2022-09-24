@@ -31,6 +31,7 @@ const gameController = (() => {
 
     const fieldElements = document.querySelectorAll(".field")
     const resetButton = document.getElementById("resetBtn")
+    const readOut = document.getElementById("gameStateReadout")
 
     resetButton.addEventListener("click", reset)
 
@@ -38,6 +39,10 @@ const gameController = (() => {
 
     function clickfunction(field) {
         field.addEventListener("click", playround)
+    }
+
+    function removeclick(field) {
+        field.removeEventListener("click", playround)
     }
 
     function setToken() {
@@ -75,17 +80,19 @@ const gameController = (() => {
 
         if (Oticker == 3) {
             console.log(Oticker, "O wins")
+            readOut.innerHTML = "O wins!!!"
+            fieldElements.forEach(removeclick)
         }
         
-        if (Xticker == 3) {
+        else if (Xticker == 3) {
             console.log(Xticker, "X wins")
+            readOut.innerHTML = "X wins!!!"
+            fieldElements.forEach(removeclick)
         }
 
-
-        /*for item in Array
-        if all board[item] = "X"
-        win
-        else return */
+        else if (round == 10 && Oticker < 3 && Xticker < 3){
+            readOut.innerHTML = "DRAW!!!"
+        }
 
     }
 
@@ -94,6 +101,8 @@ const gameController = (() => {
         round = 1
         playerToken = "X"
         document.querySelectorAll(".field").forEach((field) => field.innerHTML = "")
+        readOut.innerHTML = "Good luck!"
+        fieldElements.forEach(clickfunction)
     }
 
 
